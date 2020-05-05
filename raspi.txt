@@ -1,0 +1,18 @@
+
+
+
+# Shows temperature in degrees C in Shell
+/opt/vc/bin/vcgencmd measure_temp | grep -o -P '\d.{0,6}' | sed "s/'/°/g"
+
+# could also be used in Python:
+
+import os
+import time
+
+def measure_temp():
+        temp = os.popen("vcgencmd measure_temp").readline()
+        return (temp.replace("temp=",""))
+
+while True:
+        print(measure_temp())
+        time.sleep(1)
